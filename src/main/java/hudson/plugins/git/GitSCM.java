@@ -1169,7 +1169,11 @@ public class GitSCM extends GitSCMBackwardCompatibility {
                 // if we force the changelog, it'll contain all the changes in the repo, which is not what we want.
                 listener.getLogger().println("First time build. Skipping changelog.");
             } else {
-                changelog.to(out).max(MAX_CHANGELOG).execute();
+                changelog.to(out).max(MAX_CHANGELOG);
+                for (GitSCMExtension extension : extensions) {
+                    extension.decorateChangelogCommand(this, git, listener, changelog);
+                }
+                changelog.execute();
                 executed = true;
             }
         } catch (GitException ge) {

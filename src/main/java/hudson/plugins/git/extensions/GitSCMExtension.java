@@ -22,6 +22,7 @@ import hudson.scm.SCMRevisionState;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import org.jenkinsci.plugins.gitclient.ChangelogCommand;
 import org.jenkinsci.plugins.gitclient.CheckoutCommand;
 import org.jenkinsci.plugins.gitclient.CloneCommand;
 import org.jenkinsci.plugins.gitclient.FetchCommand;
@@ -239,6 +240,9 @@ public abstract class GitSCMExtension extends AbstractDescribableImpl<GitSCMExte
         }
     }
 
+    public void decorateChangelogCommand(GitSCM scm, GitClient git, TaskListener listener, ChangelogCommand cmd) throws IOException, InterruptedException, GitException {
+    }
+    
     /**
      * Contribute additional environment variables for the Git invocation.
      */
